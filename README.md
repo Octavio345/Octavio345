@@ -19,6 +19,13 @@ Me chamo Octavio Agusto, tenho 16 anos, atualmente estou cursando desenvolviment
             src="https://custom-icon-badges.demolab.com/github/followers/Octavio345?color=236ad3&labelColor=1155ba&style=for-the-badge&logo=github&label=Seguidores&logoColor=white"
         />
     </a>
+     <a href="https://www.instagram.com/octavio.augusto07/">
+        <img 
+            alt="Instagram" 
+            title="Me siga no GitHub" 
+            src="https://img.shields.io/badge/Instagram-E4405F?style=for-the-badge&logo=instagram&logoColor=white"
+        />
+    </a>
 </p>
 
 ---
