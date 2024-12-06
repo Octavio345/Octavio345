@@ -2,7 +2,7 @@
 
 **`Cursando Desenvolvimento`**
 
-Me chamo Octavio Agusto, tenho 16 anos, atualmente estou cursando desenvolvimento de sistema na Etec Polivalente com extensão com a Fatec e parceria com a IBM,sempre gosto de aprender e ouvir coisas novas e está área da tecnologia me permite poder apreder cada vez mais, sou apaixonado em esportes como futebol e musculação e entendo que temos que ter uma boa condição tanto fisíca e mental.
+Me chamo Octavio Agusto, tenho 16 anos, atualmente estou cursando desenvolvimento de sistema na Etec Polivalente com extensão com a Fatec e parceria com a IBM, sempre gosto de aprender e ouvir coisas novas e está área da tecnologia me permite poder apreder cada vez mais, sou apaixonado em esportes como futebol e musculação e entendo que temos que ter uma boa condição tanto fisíca e mental.
 
 <p align="left">
     <a href="https://github.com/Octavio345?tab=repositories">
