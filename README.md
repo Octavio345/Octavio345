@@ -81,6 +81,15 @@ Me chamo Octavio Agusto, tenho 16 anos, atualmente estou cursando desenvolviment
     style="padding-right: 10px;" 
     src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" 
 />
+
+<img 
+    align="left" 
+    alt="Php" 
+    title="Php"
+    width="30px" 
+    style="padding-right: 10px;" 
+    src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/php/php-original.svg" 
+/>
 <br/>
 ### 📊 Estatísticas
 
