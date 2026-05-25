@@ -1,0 +1,9 @@
+{
+  "name": "octavio-profile-readme",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "generate": "node scripts/generate-profile-assets.mjs"
+  }
+}
