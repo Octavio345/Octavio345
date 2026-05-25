@@ -12,6 +12,24 @@ const token = process.env.GITHUB_TOKEN || "";
 const outputDir = "assets";
 const h = React.createElement;
 
+function contributionWindow() {
+  const to = new Date();
+  to.setUTCHours(23, 59, 59, 999);
+
+  const from = new Date(to);
+  from.setUTCDate(from.getUTCDate() - 370);
+  from.setUTCHours(0, 0, 0, 0);
+
+  return {
+    from,
+    to,
+    fromDate: from.toISOString().slice(0, 10),
+    toDate: to.toISOString().slice(0, 10),
+    fromDateTime: from.toISOString(),
+    toDateTime: to.toISOString()
+  };
+}
+
 function xml(value) {
   return String(value)
     .replaceAll("&", "&amp;")
@@ -32,38 +50,41 @@ function levelFor(count) {
   return 4;
 }
 
-function fallbackCalendar() {
+function emptyCalendar() {
   const days = [];
-  const today = new Date();
-  today.setUTCHours(0, 0, 0, 0);
+  const { from } = contributionWindow();
 
-  for (let i = 370; i >= 0; i -= 1) {
-    const date = new Date(today);
-    date.setUTCDate(today.getUTCDate() - i);
-    const wave = Math.sin(i * 0.17) + Math.cos(i * 0.09);
-    const sprint = i % 13 === 0 ? 8 : 0;
-    const count = Math.max(0, Math.round(wave * 2 + 3 + sprint - (i % 8 === 0 ? 2 : 0)));
+  for (let i = 0; i <= 370; i += 1) {
+    const date = new Date(from);
+    date.setUTCDate(from.getUTCDate() + i);
 
     days.push({
       date: date.toISOString().slice(0, 10),
-      contributionCount: count,
+      contributionCount: 0,
       weekday: date.getUTCDay()
     });
   }
 
   return {
-    totalContributions: 430,
+    totalContributions: 0,
+    totalCommitContributions: 0,
     days
   };
 }
 
 async function fetchContributionCalendar() {
-  if (!token) return fallbackCalendar();
+  if (!token) {
+    const publicCalendar = await fetchPublicCommitCalendar();
+    return publicCalendar || emptyCalendar();
+  }
+
+  const range = contributionWindow();
 
   const query = `
-    query($login: String!) {
+    query($login: String!, $from: DateTime!, $to: DateTime!) {
       user(login: $login) {
-        contributionsCollection {
+        contributionsCollection(from: $from, to: $to) {
+          totalCommitContributions
           contributionCalendar {
             totalContributions
             weeks {
@@ -86,19 +107,87 @@ async function fetchContributionCalendar() {
       "content-type": "application/json",
       "user-agent": "octavio-profile-readme"
     },
-    body: JSON.stringify({ query, variables: { login: username } })
+    body: JSON.stringify({
+      query,
+      variables: {
+        login: username,
+        from: range.fromDateTime,
+        to: range.toDateTime
+      }
+    })
   });
 
-  if (!response.ok) return fallbackCalendar();
+  if (!response.ok) return (await fetchPublicCommitCalendar()) || emptyCalendar();
 
   const payload = await response.json();
-  const calendar = payload?.data?.user?.contributionsCollection?.contributionCalendar;
+  const collection = payload?.data?.user?.contributionsCollection;
+  const calendar = collection?.contributionCalendar;
 
-  if (!calendar?.weeks) return fallbackCalendar();
+  if (!calendar?.weeks) return (await fetchPublicCommitCalendar()) || emptyCalendar();
 
   return {
     totalContributions: calendar.totalContributions,
+    totalCommitContributions: collection.totalCommitContributions,
     days: calendar.weeks.flatMap((week) => week.contributionDays)
+  };
+}
+
+async function fetchPublicCommitCalendar() {
+  const range = contributionWindow();
+  const headers = {
+    accept: "application/vnd.github.cloak-preview+json",
+    "user-agent": "octavio-profile-readme"
+  };
+
+  const daysByDate = new Map();
+  const start = new Date(range.from);
+
+  for (let i = 0; i <= 370; i += 1) {
+    const date = new Date(start);
+    date.setUTCDate(start.getUTCDate() + i);
+    daysByDate.set(date.toISOString().slice(0, 10), {
+      date: date.toISOString().slice(0, 10),
+      contributionCount: 0,
+      weekday: date.getUTCDay()
+    });
+  }
+
+  const query = encodeURIComponent(`author:${username} author-date:${range.fromDate}..${range.toDate}`);
+  let totalCommitContributions = 0;
+  let page = 1;
+
+  while (page <= 10) {
+    let response;
+
+    try {
+      response = await fetch(`https://api.github.com/search/commits?q=${query}&per_page=100&page=${page}`, {
+        headers
+      });
+    } catch {
+      return null;
+    }
+
+    if (!response.ok) return null;
+
+    const payload = await response.json();
+    totalCommitContributions = payload.total_count ?? totalCommitContributions;
+
+    for (const item of payload.items || []) {
+      const date = item?.commit?.author?.date?.slice(0, 10);
+      const day = daysByDate.get(date);
+      if (day) day.contributionCount += 1;
+    }
+
+    if (!payload.items?.length || page * 100 >= totalCommitContributions) break;
+    page += 1;
+  }
+
+  const days = Array.from(daysByDate.values());
+
+  return {
+    totalContributions: totalCommitContributions,
+    totalCommitContributions,
+    days
   };
 }
 
@@ -348,7 +437,6 @@ function ProfileHeader() {
       h("style", null, `
         .dash { stroke-dasharray: 14 24; animation: dash 32s linear infinite; }
         .scan { animation: scan 8s ease-in-out infinite; }
-        .float { animation: float 9s ease-in-out infinite; }
         .pulse { animation: pulse 5s ease-in-out infinite; transform-origin: center; }
         .pulse2 { animation: pulse 5s ease-in-out infinite; animation-delay: 1.6s; transform-origin: center; }
         .cursor { animation: cursor 1.2s steps(2, end) infinite; }
@@ -357,10 +445,6 @@ function ProfileHeader() {
           0%, 100% { transform: translateX(-240px); opacity: 0; }
           18%, 65% { opacity: .42; }
           82% { transform: translateX(1050px); opacity: 0; }
-        }
-        @keyframes float {
-          0%, 100% { transform: translateY(0); }
-          50% { transform: translateY(-4px); }
         }
         @keyframes pulse {
           0%, 100% { opacity: .52; transform: scale(.98); }
@@ -408,10 +492,10 @@ function ProfileHeader() {
     h(TechChip, { x: 560, y: 272, icon: icons.siGithub, label: "Versionamento", color: "#F0F6FC" }),
     h(
       "g",
-      { className: "float", transform: "translate(1010 238)" },
+      { transform: "translate(1010 238)" },
       h("rect", { x: 0, y: 0, width: 298, height: 110, rx: 24, fill: "#0D1117", stroke: "#30363D" }),
       h("text", { x: 28, y: 42, fill: "#8B949E", fontFamily: "Inter, Segoe UI, Arial, sans-serif", fontSize: 15, fontWeight: 800, letterSpacing: 2 }, "PROJETO ATUAL"),
-      h("text", { x: 28, y: 78, fill: "#F0F6FC", fontFamily: "Inter, Segoe UI, Arial, sans-serif", fontSize: 26, fontWeight: 900 }, "TCC • ML • Backend")
+      h("text", { x: 28, y: 78, fill: "#F0F6FC", fontFamily: "Inter, Segoe UI, Arial, sans-serif", fontSize: 26, fontWeight: 900 }, "TCC | ML | Backend")
     ),
     h(
       "g",
@@ -426,7 +510,8 @@ function ProfileHeader() {
 
 function ContributionGrid({ calendar }) {
   const days = calendar.days.slice(-371);
-  const total = calendar.totalContributions || days.reduce((sum, day) => sum + day.contributionCount, 0);
+  const totalCommits = calendar.totalCommitContributions ?? calendar.totalContributions ?? days.reduce((sum, day) => sum + day.contributionCount, 0);
+  const totalContributions = calendar.totalContributions ?? days.reduce((sum, day) => sum + day.contributionCount, 0);
   const activeDays = days.filter((day) => day.contributionCount > 0).length;
   const maxDay = days.reduce((best, day) => (day.contributionCount > best.contributionCount ? day : best), days[0]);
 
@@ -501,7 +586,6 @@ function ContributionGrid({ calendar }) {
         .hot { animation-name: pulse; animation-timing-function: ease-in-out; animation-iteration-count: infinite; }
         .sweep { animation: sweep 8.5s ease-in-out infinite; }
         .dash { stroke-dasharray: 18 24; animation: dash 36s linear infinite; }
-        .float { animation: float 9s ease-in-out infinite; }
         @keyframes pulse {
           0%, 100% { opacity: .78; transform: scale(.98); }
           50% { opacity: .98; transform: scale(1.025); }
@@ -512,16 +596,12 @@ function ContributionGrid({ calendar }) {
           82% { transform: translateX(${gridWidth + 80}px); opacity: 0; }
         }
         @keyframes dash { to { stroke-dashoffset: -650; } }
-        @keyframes float {
-          0%, 100% { transform: translateY(0); }
-          50% { transform: translateY(-4px); }
-        }
       `)
     ),
     h("rect", { width: 1400, height: 520, rx: 32, fill: "url(#bg)" }),
     h("rect", { x: 34, y: 34, width: 1332, height: 452, rx: 28, fill: "#0D1117", opacity: 0.62, stroke: "#30363D" }),
-    h("text", { x: 76, y: 88, fill: "#F0F6FC", fontFamily: "Inter, Segoe UI, Arial, sans-serif", fontSize: 30, fontWeight: 900, letterSpacing: 1 }, "Contribuicoes"),
-    h("text", { x: 76, y: 120, fill: "#8B949E", fontFamily: "Inter, Segoe UI, Arial, sans-serif", fontSize: 15 }, "Atualizado automaticamente com dados do GitHub."),
+    h("text", { x: 76, y: 90, fill: "#F0F6FC", fontFamily: "Inter, Segoe UI, Arial, sans-serif", fontSize: 34, fontWeight: 900, letterSpacing: 0 }, "Commits e contribuicoes"),
+    h("text", { x: 76, y: 124, fill: "#B7C3D0", fontFamily: "Inter, Segoe UI, Arial, sans-serif", fontSize: 17, fontWeight: 500 }, "Numeros reais do GitHub, atualizados automaticamente pela Action."),
     h("path", {
       className: "dash",
       d: "M76 405C220 312 340 396 485 284C628 176 780 306 932 206C1070 115 1194 170 1322 94",
@@ -543,19 +623,26 @@ function ContributionGrid({ calendar }) {
     ),
     h(
       "g",
-      { className: "float", transform: "translate(1120 172)" },
+      { transform: "translate(1120 172)" },
       h("rect", { x: 0, y: 0, width: 202, height: 96, rx: 20, fill: "#05070D", stroke: "#30363D" }),
-      h("text", { x: 24, y: 34, fill: "#8B949E", fontFamily: "Inter, Segoe UI, Arial, sans-serif", fontSize: 13, fontWeight: 800, letterSpacing: 2 }, "TOTAL"),
-      h("text", { x: 24, y: 72, fill: "#39D353", fontFamily: "Inter, Segoe UI, Arial, sans-serif", fontSize: 36, fontWeight: 900 }, `${xml(total)}+`)
+      h("text", { x: 24, y: 34, fill: "#B7C3D0", fontFamily: "Inter, Segoe UI, Arial, sans-serif", fontSize: 13, fontWeight: 800, letterSpacing: 2 }, "COMMITS"),
+      h("text", { x: 24, y: 72, fill: "#39D353", fontFamily: "Inter, Segoe UI, Arial, sans-serif", fontSize: 38, fontWeight: 900 }, `${xml(totalCommits)}`)
     ),
     h(
       "g",
       { transform: "translate(1120 292)" },
-      h("rect", { x: 0, y: 0, width: 202, height: 96, rx: 20, fill: "#05070D", stroke: "#30363D" }),
-      h("text", { x: 24, y: 34, fill: "#8B949E", fontFamily: "Inter, Segoe UI, Arial, sans-serif", fontSize: 13, fontWeight: 800, letterSpacing: 2 }, "ACTIVE DAYS"),
-      h("text", { x: 24, y: 72, fill: "#58A6FF", fontFamily: "Inter, Segoe UI, Arial, sans-serif", fontSize: 36, fontWeight: 900 }, `${xml(activeDays)}`)
+      h("rect", { x: 0, y: 0, width: 202, height: 86, rx: 20, fill: "#05070D", stroke: "#30363D" }),
+      h("text", { x: 24, y: 31, fill: "#B7C3D0", fontFamily: "Inter, Segoe UI, Arial, sans-serif", fontSize: 13, fontWeight: 800, letterSpacing: 2 }, "CONTRIB."),
+      h("text", { x: 24, y: 66, fill: "#58A6FF", fontFamily: "Inter, Segoe UI, Arial, sans-serif", fontSize: 34, fontWeight: 900 }, `${xml(totalContributions)}`)
     ),
-    h("text", { x: 76, y: 458, fill: "#8B949E", fontFamily: "JetBrains Mono, Consolas, monospace", fontSize: 14 }, `best day: ${xml(maxDay?.date || "loading")} with ${xml(maxDay?.contributionCount || 0)} contributions`)
+    h(
+      "g",
+      { transform: "translate(1120 398)" },
+      h("rect", { x: 0, y: 0, width: 202, height: 58, rx: 18, fill: "#05070D", stroke: "#30363D" }),
+      h("text", { x: 22, y: 24, fill: "#B7C3D0", fontFamily: "Inter, Segoe UI, Arial, sans-serif", fontSize: 12, fontWeight: 800, letterSpacing: 1.4 }, "DIAS ATIVOS"),
+      h("text", { x: 146, y: 38, fill: "#58A6FF", fontFamily: "Inter, Segoe UI, Arial, sans-serif", fontSize: 26, fontWeight: 900 }, `${xml(activeDays)}`)
+    ),
+    h("text", { x: 76, y: 458, fill: "#B7C3D0", fontFamily: "Inter, Segoe UI, Arial, sans-serif", fontSize: 14 }, `Melhor dia: ${xml(maxDay?.date || "carregando")} com ${xml(maxDay?.contributionCount || 0)} contribuicoes`)
   );
 }
 

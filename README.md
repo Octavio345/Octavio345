@@ -19,7 +19,7 @@
   <a href="https://www.instagram.com/octavio.augusto07/">
     <img alt="Instagram" src="https://img.shields.io/badge/Instagram-0D1117?style=for-the-badge&logo=instagram&logoColor=E4405F" />
   </a>
-  <img alt="400+ commits" src="https://img.shields.io/badge/400%2B_commits-0D1117?style=for-the-badge&logo=githubactions&logoColor=39D353&labelColor=161B22" />
+  <img alt="Atualizado pelo GitHub Actions" src="https://img.shields.io/badge/Atualizado_por-GitHub_Actions-0D1117?style=for-the-badge&logo=githubactions&logoColor=39D353&labelColor=161B22" />
 </p>
 
 ---
