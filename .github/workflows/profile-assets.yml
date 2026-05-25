@@ -25,6 +25,9 @@ jobs:
         with:
           node-version: 20
 
+      - name: Install dependencies
+        run: npm ci
+
       - name: Generate animated SVG assets
         run: npm run generate
         env:
@@ -36,7 +39,7 @@ jobs:
           if [ -n "$(git status --porcelain assets)" ]; then
             git config user.name "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git add assets/profile-header.svg assets/tech-stack.svg assets/cinematic-contributions.svg
+            git add assets/profile-header.svg assets/cinematic-contributions.svg
             git commit -m "Update profile assets"
             git push
           else
