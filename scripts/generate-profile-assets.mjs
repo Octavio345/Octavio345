@@ -124,6 +124,34 @@ function SimpleIcon({ icon, x, y, size = 28, color = `#${icon.hex}` }) {
   );
 }
 
+function ChatGptMark({ x, y, size = 28, color = "#10A37F" }) {
+  const scale = size / 64;
+
+  return h(
+    "g",
+    {
+      transform: `translate(${x} ${y}) scale(${scale})`,
+      fill: "none",
+      stroke: color,
+      strokeWidth: 5,
+      strokeLinecap: "round",
+      strokeLinejoin: "round"
+    },
+    h("path", { d: "M32 8C42 8 47 17 43 25" }),
+    h("path", { d: "M43 25C52 28 55 39 48 47" }),
+    h("path", { d: "M48 47C42 55 30 54 26 46" }),
+    h("path", { d: "M26 46C17 49 8 42 9 32" }),
+    h("path", { d: "M9 32C8 22 17 15 26 18" }),
+    h("path", { d: "M26 18C30 10 42 9 47 17" }),
+    h("path", { d: "M22 25L38 16" }),
+    h("path", { d: "M42 27L42 45" }),
+    h("path", { d: "M36 49L20 40" }),
+    h("path", { d: "M17 35L17 19" }),
+    h("path", { d: "M22 18L38 27" }),
+    h("path", { d: "M42 38L26 47" })
+  );
+}
+
 function TechChip({ x, y, icon, label, color }) {
   return h(
     "g",
@@ -152,6 +180,124 @@ function TechChip({ x, y, icon, label, color }) {
       fontSize: 18,
       fontWeight: 850
     }, label)
+  );
+}
+
+function StackCard({ x, y, icon, label, color, customIcon }) {
+  return h(
+    "g",
+    { transform: `translate(${x} ${y})` },
+    h("rect", {
+      width: 170,
+      height: 124,
+      rx: 22,
+      fill: "#0B111D",
+      stroke: "#263449"
+    }),
+    h("rect", {
+      x: 45,
+      y: 22,
+      width: 80,
+      height: 58,
+      rx: 18,
+      fill: "#111827",
+      stroke: "#243044"
+    }),
+    customIcon
+      ? customIcon(68, 35, 34)
+      : h(SimpleIcon, { icon, x: 70, y: 35, size: 34, color }),
+    h("text", {
+      x: 85,
+      y: 103,
+      textAnchor: "middle",
+      fill: "#F0F6FC",
+      fontFamily: "Inter, Segoe UI, Arial, sans-serif",
+      fontSize: 16,
+      fontWeight: 850
+    }, label)
+  );
+}
+
+function StackShowcase() {
+  const items = [
+    { label: "HTML5", icon: icons.siHtml5, color: "#E34F26" },
+    { label: "CSS", icon: icons.siCss, color: "#663399" },
+    { label: "JavaScript", icon: icons.siJavascript, color: "#F7DF1E" },
+    { label: "React", icon: icons.siReact, color: "#61DAFB" },
+    { label: "Bootstrap", icon: icons.siBootstrap, color: "#7952B3" },
+    { label: "Tailwind", icon: icons.siTailwindcss, color: "#06B6D4" },
+    { label: "Python", icon: icons.siPython, color: "#3776AB" },
+    { label: "PHP", icon: icons.siPhp, color: "#777BB4" },
+    { label: "Git", icon: icons.siGit, color: "#F05032" },
+    { label: "GitHub", icon: icons.siGithub, color: "#F0F6FC" },
+    { label: "ChatGPT", color: "#10A37F", customIcon: (x, y, size) => h(ChatGptMark, { x, y, size }) },
+    { label: "Claude", icon: icons.siAnthropic, color: "#D97757" },
+    { label: "OpenCV", icon: icons.siOpencv, color: "#5C3EE8" },
+    { label: "Scikit-Learn", icon: icons.siScikitlearn, color: "#F7931E" }
+  ];
+
+  return h(
+    Svg,
+    { width: 1400, height: 520 },
+    h(
+      "defs",
+      null,
+      h(
+        "linearGradient",
+        { id: "stackBg", x1: 0, y1: 0, x2: 1400, y2: 520, gradientUnits: "userSpaceOnUse" },
+        h("stop", { stopColor: "#070B12" }),
+        h("stop", { offset: 0.55, stopColor: "#0D1117" }),
+        h("stop", { offset: 1, stopColor: "#081521" })
+      ),
+      h(
+        "radialGradient",
+        { id: "stackGlow", cx: 0, cy: 0, r: 1, gradientUnits: "userSpaceOnUse", gradientTransform: "translate(700 250) scale(650 260)" },
+        h("stop", { stopColor: "#58A6FF", stopOpacity: 0.15 }),
+        h("stop", { offset: 1, stopColor: "#58A6FF", stopOpacity: 0 })
+      ),
+      h(
+        "pattern",
+        { id: "stackGrid", width: 44, height: 44, patternUnits: "userSpaceOnUse" },
+        h("path", { d: "M44 0H0V44", stroke: "#1B2636", strokeWidth: 1, opacity: 0.28 })
+      ),
+      h("style", null, `
+        .stack-line { stroke-dasharray: 12 18; animation: stackDash 34s linear infinite; }
+        .stack-card { animation: stackFloat 8s ease-in-out infinite; }
+        .stack-card:nth-of-type(2n) { animation-delay: .7s; }
+        .stack-card:nth-of-type(3n) { animation-delay: 1.2s; }
+        @keyframes stackDash { to { stroke-dashoffset: -520; } }
+        @keyframes stackFloat {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-3px); }
+        }
+      `)
+    ),
+    h("rect", { width: 1400, height: 520, rx: 32, fill: "url(#stackBg)" }),
+    h("rect", { width: 1400, height: 520, rx: 32, fill: "url(#stackGrid)", opacity: 0.7 }),
+    h("rect", { width: 1400, height: 520, rx: 32, fill: "url(#stackGlow)" }),
+    h("rect", { x: 42, y: 42, width: 1316, height: 436, rx: 28, fill: "#0D1117", opacity: 0.72, stroke: "#30363D" }),
+    h("path", {
+      className: "stack-line",
+      d: "M82 405C250 338 388 380 542 298C710 208 858 310 1020 220C1150 148 1242 178 1318 120",
+      stroke: "#58A6FF",
+      strokeWidth: 2,
+      opacity: 0.20
+    }),
+    h("text", { x: 82, y: 92, fill: "#F0F6FC", fontFamily: "Inter, Segoe UI, Arial, sans-serif", fontSize: 32, fontWeight: 900, letterSpacing: 1 }, "Stack"),
+    h("text", { x: 82, y: 122, fill: "#8B949E", fontFamily: "Inter, Segoe UI, Arial, sans-serif", fontSize: 16 }, "Tecnologias que uso para construir interfaces, APIs, IA aplicada e visao computacional."),
+    items.map((item, index) => {
+      const col = index % 7;
+      const row = Math.floor(index / 7);
+      return h(
+        "g",
+        { className: "stack-card", key: item.label },
+        h(StackCard, {
+          x: 82 + col * 182,
+          y: 166 + row * 148,
+          ...item
+        })
+      );
+    })
   );
 }
 
@@ -200,25 +346,25 @@ function ProfileHeader() {
         h("feMerge", null, h("feMergeNode", { in: "blur" }), h("feMergeNode", { in: "SourceGraphic" }))
       ),
       h("style", null, `
-        .dash { stroke-dasharray: 14 24; animation: dash 18s linear infinite; }
-        .scan { animation: scan 5.2s ease-in-out infinite; }
-        .float { animation: float 5s ease-in-out infinite; }
-        .pulse { animation: pulse 2.8s ease-in-out infinite; transform-origin: center; }
-        .pulse2 { animation: pulse 2.8s ease-in-out infinite; animation-delay: 1.1s; transform-origin: center; }
-        .cursor { animation: cursor 1s steps(2, end) infinite; }
+        .dash { stroke-dasharray: 14 24; animation: dash 32s linear infinite; }
+        .scan { animation: scan 8s ease-in-out infinite; }
+        .float { animation: float 9s ease-in-out infinite; }
+        .pulse { animation: pulse 5s ease-in-out infinite; transform-origin: center; }
+        .pulse2 { animation: pulse 5s ease-in-out infinite; animation-delay: 1.6s; transform-origin: center; }
+        .cursor { animation: cursor 1.2s steps(2, end) infinite; }
         @keyframes dash { to { stroke-dashoffset: -520; } }
         @keyframes scan {
           0%, 100% { transform: translateX(-240px); opacity: 0; }
-          18%, 65% { opacity: .82; }
+          18%, 65% { opacity: .42; }
           82% { transform: translateX(1050px); opacity: 0; }
         }
         @keyframes float {
           0%, 100% { transform: translateY(0); }
-          50% { transform: translateY(-8px); }
+          50% { transform: translateY(-4px); }
         }
         @keyframes pulse {
-          0%, 100% { opacity: .48; transform: scale(.94); }
-          50% { opacity: 1; transform: scale(1.06); }
+          0%, 100% { opacity: .52; transform: scale(.98); }
+          50% { opacity: .9; transform: scale(1.02); }
         }
         @keyframes cursor {
           0%, 49% { opacity: 1; }
@@ -253,19 +399,19 @@ function ProfileHeader() {
     h(
       "g",
       { transform: "translate(82 76)" },
-      h("text", { x: 0, y: 24, fill: "#8B949E", fontFamily: "Inter, Segoe UI, Arial, sans-serif", fontSize: 16, fontWeight: 800, letterSpacing: 4 }, "PROFILE SYSTEM"),
+      h("text", { x: 0, y: 24, fill: "#8B949E", fontFamily: "Inter, Segoe UI, Arial, sans-serif", fontSize: 16, fontWeight: 800, letterSpacing: 3 }, "DESENVOLVIMENTO DE SISTEMAS"),
       h("text", { x: 0, y: 98, fill: "#F0F6FC", fontFamily: "Inter, Segoe UI, Arial, sans-serif", fontSize: 72, fontWeight: 900, letterSpacing: 1 }, "OCTAVIO AUGUSTO"),
       h("text", { x: 4, y: 145, fill: "#C9D1D9", fontFamily: "Inter, Segoe UI, Arial, sans-serif", fontSize: 24, fontWeight: 650 }, "Web Developer | Machine Learning | IA Aplicada | Marketing Digital")
     ),
-    h(TechChip, { x: 88, y: 272, icon: icons.siReact, label: "React Frontend", color: "#61DAFB" }),
-    h(TechChip, { x: 324, y: 272, icon: icons.siPython, label: "Python ML", color: "#3776AB" }),
-    h(TechChip, { x: 560, y: 272, icon: icons.siGithub, label: "GitHub Flow", color: "#F0F6FC" }),
+    h(TechChip, { x: 88, y: 272, icon: icons.siReact, label: "Frontend", color: "#61DAFB" }),
+    h(TechChip, { x: 324, y: 272, icon: icons.siPython, label: "Machine Learning", color: "#3776AB" }),
+    h(TechChip, { x: 560, y: 272, icon: icons.siGithub, label: "Versionamento", color: "#F0F6FC" }),
     h(
       "g",
       { className: "float", transform: "translate(1010 238)" },
       h("rect", { x: 0, y: 0, width: 298, height: 110, rx: 24, fill: "#0D1117", stroke: "#30363D" }),
-      h("text", { x: 28, y: 42, fill: "#8B949E", fontFamily: "Inter, Segoe UI, Arial, sans-serif", fontSize: 15, fontWeight: 800, letterSpacing: 2 }, "FOCO ATUAL"),
-      h("text", { x: 28, y: 78, fill: "#F0F6FC", fontFamily: "Inter, Segoe UI, Arial, sans-serif", fontSize: 26, fontWeight: 900 }, "Web + AI + Vision")
+      h("text", { x: 28, y: 42, fill: "#8B949E", fontFamily: "Inter, Segoe UI, Arial, sans-serif", fontSize: 15, fontWeight: 800, letterSpacing: 2 }, "PROJETO ATUAL"),
+      h("text", { x: 28, y: 78, fill: "#F0F6FC", fontFamily: "Inter, Segoe UI, Arial, sans-serif", fontSize: 26, fontWeight: 900 }, "TCC • ML • Backend")
     ),
     h(
       "g",
@@ -353,29 +499,29 @@ function ContributionGrid({ calendar }) {
         .l3 { fill: #26A641; }
         .l4 { fill: #39D353; filter: url(#glow); }
         .hot { animation-name: pulse; animation-timing-function: ease-in-out; animation-iteration-count: infinite; }
-        .sweep { animation: sweep 5.5s ease-in-out infinite; }
-        .dash { stroke-dasharray: 18 24; animation: dash 18s linear infinite; }
-        .float { animation: float 5s ease-in-out infinite; }
+        .sweep { animation: sweep 8.5s ease-in-out infinite; }
+        .dash { stroke-dasharray: 18 24; animation: dash 36s linear infinite; }
+        .float { animation: float 9s ease-in-out infinite; }
         @keyframes pulse {
-          0%, 100% { opacity: .72; transform: scale(.96); }
-          50% { opacity: 1; transform: scale(1.08); }
+          0%, 100% { opacity: .78; transform: scale(.98); }
+          50% { opacity: .98; transform: scale(1.025); }
         }
         @keyframes sweep {
           0%, 100% { transform: translateX(-170px); opacity: 0; }
-          18%, 62% { opacity: .85; }
+          18%, 62% { opacity: .42; }
           82% { transform: translateX(${gridWidth + 80}px); opacity: 0; }
         }
         @keyframes dash { to { stroke-dashoffset: -650; } }
         @keyframes float {
           0%, 100% { transform: translateY(0); }
-          50% { transform: translateY(-6px); }
+          50% { transform: translateY(-4px); }
         }
       `)
     ),
     h("rect", { width: 1400, height: 520, rx: 32, fill: "url(#bg)" }),
     h("rect", { x: 34, y: 34, width: 1332, height: 452, rx: 28, fill: "#0D1117", opacity: 0.62, stroke: "#30363D" }),
-    h("text", { x: 76, y: 88, fill: "#F0F6FC", fontFamily: "Inter, Segoe UI, Arial, sans-serif", fontSize: 30, fontWeight: 900, letterSpacing: 2 }, "LIVE CONTRIBUTION GRID"),
-    h("text", { x: 76, y: 120, fill: "#8B949E", fontFamily: "JetBrains Mono, Consolas, monospace", fontSize: 15 }, "generated from GitHub data | updated by GitHub Actions"),
+    h("text", { x: 76, y: 88, fill: "#F0F6FC", fontFamily: "Inter, Segoe UI, Arial, sans-serif", fontSize: 30, fontWeight: 900, letterSpacing: 1 }, "Contribuicoes"),
+    h("text", { x: 76, y: 120, fill: "#8B949E", fontFamily: "Inter, Segoe UI, Arial, sans-serif", fontSize: 15 }, "Atualizado automaticamente com dados do GitHub."),
     h("path", {
       className: "dash",
       d: "M76 405C220 312 340 396 485 284C628 176 780 306 932 206C1070 115 1194 170 1322 94",
@@ -418,6 +564,7 @@ await mkdir(outputDir, { recursive: true });
 const calendar = await fetchContributionCalendar();
 
 await writeFile(`${outputDir}/profile-header.svg`, renderSvg(h(ProfileHeader)), "utf8");
+await writeFile(`${outputDir}/tech-stack.svg`, renderSvg(h(StackShowcase)), "utf8");
 await writeFile(`${outputDir}/cinematic-contributions.svg`, renderSvg(h(ContributionGrid, { calendar })), "utf8");
 
 console.log(`Generated React profile assets for ${username}`);
