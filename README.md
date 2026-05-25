@@ -29,7 +29,7 @@
 <table>
   <tr>
     <td width="58%">
-      <strong>Octavio Augusto</strong>, tambem conhecido como <strong>Pescador</strong>. Curso <strong>Desenvolvimento de Sistemas</strong> na <strong>Etec Polivalente</strong>, com extensao na <strong>Fatec</strong>.
+      <strong>Octavio Augusto</strong>. Curso <strong>Desenvolvimento de Sistemas</strong> na <strong>Etec Polivalente</strong>, com extensao na <strong>Fatec</strong>.
       <br /><br />
       Trabalho com <strong>desenvolvimento web</strong>, <strong>marketing digital</strong> e <strong>social media</strong>, criando projetos digitais com foco em clareza, execucao e resultado.
     </td>
@@ -46,20 +46,7 @@
 ## Stack
 
 <div align="center">
-  <img alt="HTML5" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" width="44" />
-  <img alt="CSS3" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" width="44" />
-  <img alt="JavaScript" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" width="44" />
-  <img alt="Python" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" width="44" />
-  <img alt="React" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" width="44" />
-  <img alt="Bootstrap" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg" width="44" />
-  <img alt="Tailwind CSS" src="https://cdn.simpleicons.org/tailwindcss/06B6D4" width="44" />
-  <img alt="PHP" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg" width="44" />
-  <img alt="Git" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" width="44" />
-  <img alt="GitHub" src="https://img.shields.io/badge/GitHub-FFFFFF?style=for-the-badge&logo=github&logoColor=181717" />
-  <img alt="OpenAI" src="https://img.shields.io/badge/OpenAI-FFFFFF?style=for-the-badge&logo=openai&logoColor=412991" />
-  <img alt="Claude" src="https://img.shields.io/badge/Claude-FFFFFF?style=for-the-badge&logo=anthropic&logoColor=191919" />
-  <img alt="OpenCV" src="https://img.shields.io/badge/OpenCV-FFFFFF?style=for-the-badge&logo=opencv&logoColor=5C3EE8" />
-  <img alt="Scikit Learn" src="https://img.shields.io/badge/Scikit--Learn-FFFFFF?style=for-the-badge&logo=scikitlearn&logoColor=F7931E" />
+  <img src="./assets/tech-stack.svg" alt="Stack profissional de tecnologias" width="100%" />
 </div>
 
 ---

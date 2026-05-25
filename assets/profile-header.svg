@@ -79,8 +79,8 @@
 
   <g transform="translate(88 272)">
     <rect x="0" y="0" width="380" height="96" rx="22" fill="#0D1117" stroke="#30363D"/>
-    <text x="26" y="39" fill="#58A6FF" font-family="JetBrains Mono, Consolas, monospace" font-size="18" font-weight="800">codename: pescador</text>
-    <text x="26" y="67" fill="#C9D1D9" font-family="JetBrains Mono, Consolas, monospace" font-size="15">building useful digital systems</text>
+    <text x="26" y="39" fill="#58A6FF" font-family="JetBrains Mono, Consolas, monospace" font-size="18" font-weight="800">status: building systems</text>
+    <text x="26" y="67" fill="#C9D1D9" font-family="JetBrains Mono, Consolas, monospace" font-size="15">web products + AI workflows</text>
     <rect class="cursor" x="328" y="50" width="12" height="20" rx="3" fill="#39D353"/>
   </g>
 

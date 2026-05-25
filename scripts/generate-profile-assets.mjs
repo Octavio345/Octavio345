@@ -180,8 +180,8 @@ function buildHeaderSvg() {
 
   <g transform="translate(88 272)">
     <rect x="0" y="0" width="380" height="96" rx="22" fill="#0D1117" stroke="#30363D"/>
-    <text x="26" y="39" fill="#58A6FF" font-family="JetBrains Mono, Consolas, monospace" font-size="18" font-weight="800">codename: pescador</text>
-    <text x="26" y="67" fill="#C9D1D9" font-family="JetBrains Mono, Consolas, monospace" font-size="15">building useful digital systems</text>
+    <text x="26" y="39" fill="#58A6FF" font-family="JetBrains Mono, Consolas, monospace" font-size="18" font-weight="800">status: building systems</text>
+    <text x="26" y="67" fill="#C9D1D9" font-family="JetBrains Mono, Consolas, monospace" font-size="15">web products + AI workflows</text>
     <rect class="cursor" x="328" y="50" width="12" height="20" rx="3" fill="#39D353"/>
   </g>
 
@@ -197,6 +197,144 @@ function buildHeaderSvg() {
     <circle class="pulse" cx="1096" cy="116" r="5" fill="#58A6FF"/>
     <circle class="pulse2" cx="1216" cy="182" r="5" fill="#39D353"/>
   </g>
+</svg>`;
+}
+
+function buildStackSvg() {
+  const groups = [
+    {
+      title: "Frontend",
+      subtitle: "interfaces, components and responsive layouts",
+      x: 70,
+      y: 124,
+      chips: [
+        ["HTML5", "#E34F26"],
+        ["CSS3", "#1572B6"],
+        ["JavaScript", "#F7DF1E"],
+        ["React", "#61DAFB"],
+        ["Bootstrap", "#7952B3"],
+        ["Tailwind CSS", "#06B6D4"]
+      ]
+    },
+    {
+      title: "Backend & Tools",
+      subtitle: "APIs, versioning and project structure",
+      x: 70,
+      y: 292,
+      chips: [
+        ["Python", "#3776AB"],
+        ["PHP", "#777BB4"],
+        ["Git", "#F05032"],
+        ["GitHub", "#F0F6FC"],
+        ["APIs", "#58A6FF"]
+      ]
+    },
+    {
+      title: "AI, ML & Vision",
+      subtitle: "applied intelligence for real projects",
+      x: 740,
+      y: 124,
+      chips: [
+        ["ChatGPT", "#10A37F"],
+        ["Claude", "#D97757"],
+        ["Chat APIs", "#58A6FF"],
+        ["Scikit-Learn", "#F7931E"],
+        ["OpenCV", "#5C3EE8"]
+      ]
+    },
+    {
+      title: "Digital Strategy",
+      subtitle: "content, presence and conversion",
+      x: 740,
+      y: 292,
+      chips: [
+        ["Social Media", "#E4405F"],
+        ["Marketing Digital", "#39D353"],
+        ["Creative", "#A5D6FF"],
+        ["Conversion", "#F7DF1E"]
+      ]
+    }
+  ];
+
+  const chipMarkup = groups
+    .map((group) => {
+      const cardWidth = 590;
+      const innerX = group.x + 26;
+      let cursorX = innerX;
+      let cursorY = group.y + 72;
+      const chips = group.chips
+        .map(([label, color]) => {
+          const width = 44 + label.length * 9;
+          if (cursorX + width > group.x + cardWidth - 26) {
+            cursorX = innerX;
+            cursorY += 44;
+          }
+          const markup = `<g transform="translate(${cursorX} ${cursorY})">
+        <rect width="${width}" height="38" rx="12" fill="#101826" stroke="#263449"/>
+        <circle cx="21" cy="19" r="5" fill="${color}"/>
+        <text x="36" y="24" fill="#F0F6FC" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="14" font-weight="800">${xml(label)}</text>
+      </g>`;
+          cursorX += width + 12;
+          return markup;
+        })
+        .join("\n");
+
+      return `<g>
+      <rect x="${group.x}" y="${group.y}" width="${cardWidth}" height="142" rx="20" fill="#0B111D" stroke="#263449"/>
+      <text x="${innerX}" y="${group.y + 38}" fill="#F0F6FC" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="23" font-weight="900">${xml(group.title)}</text>
+      <text x="${innerX}" y="${group.y + 62}" fill="#8B949E" font-family="JetBrains Mono, Consolas, monospace" font-size="13">${xml(group.subtitle)}</text>
+      ${chips}
+    </g>`;
+    })
+    .join("\n");
+
+  return `<svg width="1400" height="470" viewBox="0 0 1400 470" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1400" y2="470" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#060A12"/>
+      <stop offset="0.52" stop-color="#0D1117"/>
+      <stop offset="1" stop-color="#081827"/>
+    </linearGradient>
+    <linearGradient id="line" x1="70" y1="82" x2="1320" y2="350" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#58A6FF"/>
+      <stop offset="0.52" stop-color="#2F81F7"/>
+      <stop offset="1" stop-color="#39D353"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(665 235) rotate(18) scale(620 250)">
+      <stop stop-color="#58A6FF" stop-opacity=".20"/>
+      <stop offset="1" stop-color="#58A6FF" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="grid" width="42" height="42" patternUnits="userSpaceOnUse">
+      <path d="M42 0H0V42" stroke="#1F2A3A" stroke-width="1" opacity=".42"/>
+    </pattern>
+    <style>
+      .dash { stroke-dasharray: 12 18; animation: dash 18s linear infinite; }
+      .scan { animation: scan 5.4s ease-in-out infinite; }
+      @keyframes dash { to { stroke-dashoffset: -520; } }
+      @keyframes scan {
+        0%, 100% { transform: translateX(-180px); opacity: 0; }
+        20%, 62% { opacity: .68; }
+        82% { transform: translateX(1140px); opacity: 0; }
+      }
+    </style>
+  </defs>
+
+  <rect width="1400" height="470" rx="30" fill="url(#bg)"/>
+  <rect width="1400" height="470" rx="30" fill="url(#grid)" opacity=".72"/>
+  <rect width="1400" height="470" rx="30" fill="url(#glow)"/>
+  <rect x="34" y="34" width="1332" height="402" rx="26" fill="#0D1117" opacity=".70" stroke="#30363D"/>
+
+  <g class="scan">
+    <rect x="66" y="52" width="180" height="366" rx="90" fill="#58A6FF" opacity=".075"/>
+    <rect x="150" y="52" width="3" height="366" fill="#A5D6FF" opacity=".82"/>
+  </g>
+
+  <path class="dash" d="M70 390C238 286 350 386 514 282C676 178 830 322 990 212C1135 112 1242 168 1322 118" stroke="url(#line)" stroke-width="2" opacity=".30"/>
+
+  <text x="70" y="84" fill="#F0F6FC" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="30" font-weight="900" letter-spacing="2">PROFESSIONAL STACK</text>
+  <text x="70" y="114" fill="#8B949E" font-family="JetBrains Mono, Consolas, monospace" font-size="15">organized by practical use, not just by logo collection</text>
+
+  ${chipMarkup}
 </svg>`;
 }
 
@@ -312,6 +450,7 @@ await mkdir(outputDir, { recursive: true });
 const calendar = await fetchContributionCalendar();
 
 await writeFile(`${outputDir}/profile-header.svg`, buildHeaderSvg(), "utf8");
+await writeFile(`${outputDir}/tech-stack.svg`, buildStackSvg(), "utf8");
 await writeFile(`${outputDir}/cinematic-contributions.svg`, buildContributionSvg(calendar), "utf8");
 
 console.log(`Generated profile assets for ${username}`);
