@@ -1,26 +1,26 @@
 <div align="center">
-  <img src="./assets/profile-header.svg" alt="Octavio Augusto | Desenvolvimento de Software | IA e Machine Learning" width="100%" />
+  <img src="./assets/profile-header.svg" alt="Octavio Augusto | Software, IA e AgTech" width="100%" />
 </div>
+
+<br/>
 
 <div align="center">
 
-### 💻 Desenvolvedor de Software | IA e Machine Learning
+### Software que encontra problemas reais. IA que ajuda a enxergar o campo de outro jeito.
 
-🤖 Visão Computacional • Backend • Full Stack  
-🌱 Construindo meu caminho em AgTech & Agricultura Inteligente  
-🚀 Transformando problemas reais em soluções com tecnologia
+**Desenvolvimento de Software · Inteligência Artificial · Visão Computacional · AgTech**
 
 </div>
 
 <p align="center">
   <a href="https://github.com/Octavio345?tab=repositories">
-    <img alt="Repositórios" src="https://custom-icon-badges.demolab.com/badge/Repositórios-0D1117?style=for-the-badge&logo=repo&logoColor=58A6FF&labelColor=161B22" />
+    <img alt="Projetos" src="https://img.shields.io/badge/PROJETOS-101A16?style=for-the-badge&logo=github&logoColor=7CFF95" />
   </a>
   <a href="https://github.com/Octavio345?tab=followers">
-    <img alt="Seguidores" src="https://custom-icon-badges.demolab.com/github/followers/Octavio345?color=58A6FF&labelColor=161B22&style=for-the-badge&logo=github&label=Seguidores&logoColor=white" />
+    <img alt="GitHub" src="https://img.shields.io/badge/GITHUB-101A16?style=for-the-badge&logo=github&logoColor=7CFF95" />
   </a>
   <a href="https://www.instagram.com/octavio.augusto07/">
-    <img alt="Instagram" src="https://img.shields.io/badge/Instagram-0D1117?style=for-the-badge&logo=instagram&logoColor=E4405F" />
+    <img alt="Instagram" src="https://img.shields.io/badge/INSTAGRAM-101A16?style=for-the-badge&logo=instagram&logoColor=7CFF95" />
   </a>
 </p>
 
@@ -28,43 +28,60 @@
 
 ## Sobre mim
 
-Sou estudante de **Desenvolvimento de Sistemas** na **Etec Polivalente**, com extensão na **Fatec**. Gosto de desenvolver projetos que saem do papel e resolvem problemas reais, principalmente nas áreas de **software, inteligência artificial e automação**.
+Sou estudante de **Desenvolvimento de Sistemas na Etec Polivalente**, com extensão na **Fatec**, e gosto principalmente da parte em que tecnologia deixa de ser só código e começa a resolver um problema de verdade.
 
-Atualmente, meu TCC envolve **Machine Learning, visão computacional, Python e backend**. Também venho aprofundando meus conhecimentos em **desenvolvimento Full Stack** e quero levar essa experiência, no futuro, para projetos ligados a **AgTech e Agricultura Inteligente**.
+Hoje meu foco está em **backend, inteligência artificial, Machine Learning e visão computacional**. Meu TCC levou esse interesse para o campo: estamos desenvolvendo uma solução de **monitoramento agrícola voltada à soja**, conectando imagens de campo e drone a modelos de IA e processamento de imagens.
 
-Além da área de tecnologia, tenho experiência com **marketing digital e social media**, o que me ajuda a unir desenvolvimento, comunicação e visão de produto.
+Esse projeto acabou definindo uma direção que quero continuar explorando: **AgTech e Agricultura Inteligente**, sem abandonar a base de desenvolvimento de software que torna essas soluções possíveis.
 
 ---
 
-## Tecnologias
+## Projeto em destaque · TCC AgroTech
 
 <div align="center">
-  <img src="./assets/tech-stack.svg" alt="Tecnologias e ferramentas" width="100%" />
+  <img src="./assets/agrotech-project.svg" alt="TCC AgroTech | IA e Visão Computacional aplicadas ao monitoramento de soja" width="100%" />
+</div>
+
+O projeto reúne **Machine Learning e visão computacional** para apoiar o monitoramento da lavoura. Entre os módulos desenvolvidos estão a **classificação de doenças da soja** e a análise visual da plantação para identificar padrões de vegetação, falhas de plantio, densidade e uniformidade.
+
+No backend, utilizamos **Python + FastAPI** para receber e validar imagens, direcionar cada processamento ao módulo adequado e retornar os resultados de forma estruturada para a plataforma.
+
+> **Stack do TCC:** Python · FastAPI · TensorFlow · OpenCV · NumPy · Pillow · Docker · Hugging Face Spaces
+
+---
+
+## Minha stack
+
+<div align="center">
+  <img src="./assets/tech-stack.svg" alt="Stack de desenvolvimento, IA e AgTech" width="100%" />
 </div>
 
 ---
 
-## No que estou focado
+## O que estou construindo agora
 
-- **Desenvolvimento de Software** — aplicações web e soluções digitais.
-- **Backend** — APIs, integrações, regras de negócio e estrutura de sistemas.
-- **Machine Learning** — desenvolvimento e aplicação de modelos em projetos reais.
-- **Visão Computacional** — processamento, análise e classificação de imagens.
-- **IA Aplicada** — uso de modelos e APIs para automação e criação de soluções.
-- **AgTech** — interesse em aplicar software e inteligência artificial à agricultura inteligente.
+```text
+01  IA & Machine Learning    → modelos aplicados a problemas reais
+02  Visão Computacional     → análise, classificação e interpretação de imagens
+03  Backend                 → APIs, processamento e integração entre serviços
+04  Full Stack              → interfaces e aplicações completas
+05  AgTech                  → software e inteligência aplicados ao campo
+```
 
 ---
 
 ## Atividade no GitHub
 
 <div align="center">
-  <img src="./assets/cinematic-contributions.svg" alt="Contribuições no GitHub" width="100%" />
+  <img src="./assets/cinematic-contributions.svg" alt="Mapa de atividade no GitHub" width="100%" />
 </div>
 
 <div align="center">
-  <img
-    width="100%"
-    src="https://capsule-render.vercel.app/api?type=waving&height=120&color=0:1F6FEB,50:0D1117,100:05070D&section=footer"
-    alt="Footer"
-  />
+  <sub>Construindo, testando e aprendendo — um commit de cada vez.</sub>
+</div>
+
+<br/>
+
+<div align="center">
+  <img src="https://capsule-render.vercel.app/api?type=waving&height=100&color=0:07110C,55:123520,100:63E67A&section=footer" alt="Footer" width="100%"/>
 </div>

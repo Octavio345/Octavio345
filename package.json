@@ -1,14 +1,9 @@
 {
   "name": "octavio-profile-readme",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "private": true,
   "type": "module",
   "scripts": {
     "generate": "node scripts/generate-profile-assets.mjs"
-  },
-  "dependencies": {
-    "react": "^19.2.6",
-    "react-dom": "^19.2.6",
-    "simple-icons": "^16.21.0"
   }
 }
