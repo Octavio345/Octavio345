@@ -1,17 +1,20 @@
 <div align="center">
-  <img src="./assets/profile-header.svg" alt="Octavio Augusto | Web Developer | Machine Learning | IA Aplicada" width="100%" />
+  <img src="./assets/profile-header.svg" alt="Octavio Augusto | Desenvolvimento de Software | IA e Machine Learning" width="100%" />
 </div>
 
 <div align="center">
-  <img
-    src="https://readme-typing-svg.herokuapp.com?font=JetBrains+Mono&weight=700&size=22&duration=2600&pause=1000&color=58A6FF&center=true&vCenter=true&width=950&lines=Web+Developer;Machine+Learning+Engineer+no+TCC;Visao+Computacional+com+Python;Marketing+Digital+e+Social+Media;Automacoes+com+ChatGPT%2C+Claude+e+Chat+APIs"
-    alt="Typing animation"
-  />
+
+### 💻 Desenvolvedor de Software | IA e Machine Learning
+
+🤖 Visão Computacional • Backend • Full Stack  
+🌱 Construindo meu caminho em AgTech & Agricultura Inteligente  
+🚀 Transformando problemas reais em soluções com tecnologia
+
 </div>
 
 <p align="center">
   <a href="https://github.com/Octavio345?tab=repositories">
-    <img alt="Repositorios" src="https://custom-icon-badges.demolab.com/badge/Repositorios-0D1117?style=for-the-badge&logo=repo&logoColor=58A6FF&labelColor=161B22" />
+    <img alt="Repositórios" src="https://custom-icon-badges.demolab.com/badge/Repositórios-0D1117?style=for-the-badge&logo=repo&logoColor=58A6FF&labelColor=161B22" />
   </a>
   <a href="https://github.com/Octavio345?tab=followers">
     <img alt="Seguidores" src="https://custom-icon-badges.demolab.com/github/followers/Octavio345?color=58A6FF&labelColor=161B22&style=for-the-badge&logo=github&label=Seguidores&logoColor=white" />
@@ -19,56 +22,44 @@
   <a href="https://www.instagram.com/octavio.augusto07/">
     <img alt="Instagram" src="https://img.shields.io/badge/Instagram-0D1117?style=for-the-badge&logo=instagram&logoColor=E4405F" />
   </a>
-  <img alt="Atualizado pelo GitHub Actions" src="https://img.shields.io/badge/Atualizado_por-GitHub_Actions-0D1117?style=for-the-badge&logo=githubactions&logoColor=39D353&labelColor=161B22" />
 </p>
 
 ---
 
-## Perfil
+## Sobre mim
 
-<table>
-  <tr>
-    <td width="58%">
-      <strong>Octavio Augusto</strong>. Curso <strong>Desenvolvimento de Sistemas</strong> na <strong>Etec Polivalente</strong>, com extensao na <strong>Fatec</strong>.
-      <br /><br />
-      Trabalho com <strong>desenvolvimento web</strong>, <strong>marketing digital</strong> e <strong>social media</strong>, criando projetos digitais com foco em clareza, execucao e resultado.
-    </td>
-    <td width="42%">
-      <strong>Atualmente</strong>
-      <br /><br />
-      No TCC, atuo como <strong>Machine Learning Engineer</strong>, usando <strong>Python</strong>, <strong>visao computacional</strong>, <strong>backend</strong> e integracao de modelos. Tambem aplico IA com <strong>ChatGPT</strong>, <strong>Claude</strong> e <strong>Chat APIs</strong>.
-    </td>
-  </tr>
-</table>
+Sou estudante de **Desenvolvimento de Sistemas** na **Etec Polivalente**, com extensão na **Fatec**. Gosto de desenvolver projetos que saem do papel e resolvem problemas reais, principalmente nas áreas de **software, inteligência artificial e automação**.
+
+Atualmente, meu TCC envolve **Machine Learning, visão computacional, Python e backend**. Também venho aprofundando meus conhecimentos em **desenvolvimento Full Stack** e quero levar essa experiência, no futuro, para projetos ligados a **AgTech e Agricultura Inteligente**.
+
+Além da área de tecnologia, tenho experiência com **marketing digital e social media**, o que me ajuda a unir desenvolvimento, comunicação e visão de produto.
 
 ---
 
-## Stack
+## Tecnologias
 
 <div align="center">
-  <img src="./assets/tech-stack.svg" alt="Stack de tecnologias com logos oficiais" width="100%" />
+  <img src="./assets/tech-stack.svg" alt="Tecnologias e ferramentas" width="100%" />
 </div>
 
 ---
 
-## Contribuicoes em movimento
+## No que estou focado
 
-<div align="center">
-  <img src="./assets/cinematic-contributions.svg" alt="Grid animado de contribuicoes do GitHub" width="100%" />
-</div>
+- **Desenvolvimento de Software** — aplicações web e soluções digitais.
+- **Backend** — APIs, integrações, regras de negócio e estrutura de sistemas.
+- **Machine Learning** — desenvolvimento e aplicação de modelos em projetos reais.
+- **Visão Computacional** — processamento, análise e classificação de imagens.
+- **IA Aplicada** — uso de modelos e APIs para automação e criação de soluções.
+- **AgTech** — interesse em aplicar software e inteligência artificial à agricultura inteligente.
 
 ---
 
-## Frentes de trabalho
+## Atividade no GitHub
 
-```txt
-Web Development      HTML, CSS, JavaScript, React, Bootstrap, Tailwind CSS
-Backend              APIs, integracoes, regras de negocio e suporte a sistemas
-Machine Learning     Python, modelos, inferencia e aplicacao em projetos reais
-Computer Vision      Processamento e classificacao de imagens
-IA Aplicada          ChatGPT, Claude, Chat APIs, automacao e prototipacao
-Marketing Digital    Social Media, conteudo, posicionamento e conversao
-```
+<div align="center">
+  <img src="./assets/cinematic-contributions.svg" alt="Contribuições no GitHub" width="100%" />
+</div>
 
 <div align="center">
   <img

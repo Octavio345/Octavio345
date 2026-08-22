@@ -483,19 +483,19 @@ function ProfileHeader() {
     h(
       "g",
       { transform: "translate(82 76)" },
-      h("text", { x: 0, y: 24, fill: "#8B949E", fontFamily: "Inter, Segoe UI, Arial, sans-serif", fontSize: 16, fontWeight: 800, letterSpacing: 3 }, "DESENVOLVIMENTO DE SISTEMAS"),
+      h("text", { x: 0, y: 24, fill: "#8B949E", fontFamily: "Inter, Segoe UI, Arial, sans-serif", fontSize: 16, fontWeight: 800, letterSpacing: 3 }, "DESENVOLVIMENTO DE SOFTWARE"),
       h("text", { x: 0, y: 98, fill: "#F0F6FC", fontFamily: "Inter, Segoe UI, Arial, sans-serif", fontSize: 72, fontWeight: 900, letterSpacing: 1 }, "OCTAVIO AUGUSTO"),
-      h("text", { x: 4, y: 145, fill: "#C9D1D9", fontFamily: "Inter, Segoe UI, Arial, sans-serif", fontSize: 24, fontWeight: 650 }, "Web Developer | Machine Learning | IA Aplicada | Marketing Digital")
+      h("text", { x: 4, y: 145, fill: "#C9D1D9", fontFamily: "Inter, Segoe UI, Arial, sans-serif", fontSize: 24, fontWeight: 650 }, "IA e Machine Learning | Backend | Full Stack")
     ),
-    h(TechChip, { x: 88, y: 272, icon: icons.siReact, label: "Frontend", color: "#61DAFB" }),
+    h(TechChip, { x: 88, y: 272, icon: icons.siReact, label: "Full Stack", color: "#61DAFB" }),
     h(TechChip, { x: 324, y: 272, icon: icons.siPython, label: "Machine Learning", color: "#3776AB" }),
-    h(TechChip, { x: 560, y: 272, icon: icons.siGithub, label: "Versionamento", color: "#F0F6FC" }),
+    h(TechChip, { x: 560, y: 272, icon: icons.siGithub, label: "Backend", color: "#F0F6FC" }),
     h(
       "g",
       { transform: "translate(1010 238)" },
       h("rect", { x: 0, y: 0, width: 298, height: 110, rx: 24, fill: "#0D1117", stroke: "#30363D" }),
       h("text", { x: 28, y: 42, fill: "#8B949E", fontFamily: "Inter, Segoe UI, Arial, sans-serif", fontSize: 15, fontWeight: 800, letterSpacing: 2 }, "PROJETO ATUAL"),
-      h("text", { x: 28, y: 78, fill: "#F0F6FC", fontFamily: "Inter, Segoe UI, Arial, sans-serif", fontSize: 26, fontWeight: 900 }, "TCC | ML | Backend")
+      h("text", { x: 28, y: 78, fill: "#F0F6FC", fontFamily: "Inter, Segoe UI, Arial, sans-serif", fontSize: 26, fontWeight: 900 }, "TCC | Visão Computacional")
     ),
     h(
       "g",
