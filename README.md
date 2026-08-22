@@ -50,7 +50,7 @@ No backend, utilizamos **Python + FastAPI** para receber e validar imagens, dire
 
 ---
 
-## Minha stack
+## Minha pilha
 
 <div align="center">
   <img src="./assets/tech-stack.svg" alt="Stack de desenvolvimento, IA e AgTech" width="100%" />
