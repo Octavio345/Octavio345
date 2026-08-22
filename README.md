@@ -36,10 +36,10 @@ Esse projeto acabou definindo uma direção que quero continuar explorando: **Ag
 
 ---
 
-## Projeto em destaque · TCC AgroTech
+## Projeto em destaque · Zenith
 
 <div align="center">
-  <img src="./assets/agrotech-project.svg" alt="TCC AgroTech | IA e Visão Computacional aplicadas ao monitoramento de soja" width="100%" />
+  <img src="./assets/agrotech-project.svg" alt="Zenith | Sua precisão agrícola no ponto mais alto" width="100%" />
 </div>
 
 O projeto reúne **Machine Learning e visão computacional** para apoiar o monitoramento da lavoura. Entre os módulos desenvolvidos estão a **classificação de doenças da soja** e a análise visual da plantação para identificar padrões de vegetação, falhas de plantio, densidade e uniformidade.
